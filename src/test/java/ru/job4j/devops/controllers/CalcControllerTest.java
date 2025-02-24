@@ -28,6 +28,15 @@ class CalcControllerTest {
     }
 
     @Test
+    public void whenNegativeNumber1() {
+        var input = new TwoArgs(-1, -2);
+        var expected = new Result(-3);
+        var output = new CalcController().summarise(input);
+        assertThat(output.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
+        assertThat(output.getBody()).isEqualTo(expected);
+    }
+
+    @Test
     public void whenZeroPlusZero() {
         var input = new TwoArgs(0, 3);
         var expected = new Result(3);
