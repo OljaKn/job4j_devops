@@ -66,5 +66,26 @@ pipeline {
                         telegramSend(message: buildInfo)
                     }
                 }
+                success {
+                            script {
+                                telegramSend(chatId: '8166438409', message: "Build succeeded! 🎉\n${env.BUILD_URL}")
+                            }
+                        }
+                        failure {
+                            script {
+                                telegramSend(chatId: '8166438409', message: "Build failed! ❌\n${env.BUILD_URL}")
+                            }
+                        }
+                        unstable {
+                            script {
+                                telegramSend(chatId: '8166438409', message: "Build is unstable! ⚠️\n${env.BUILD_URL}")
+                            }
+                        }
+                        changed {
+                            script {
+                                telegramSend(chatId: '8166438409', message: "Build status changed!\n${env.BUILD_URL}")
+                            }
+                        }
+                    }
             }
 }
